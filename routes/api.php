@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/package', [ App\Http\Controllers\API\PackageController::class, 'index']);
-Route::post('/package', [App\Http\Controllers\API\PackageController::class, 'store']);
-Route::put( '/package/{id}', [App\Http\Controllers\API\PackageController::class, 'update']);
-Route::patch('/package/{id}', [App\Http\Controllers\API\PackageController::class, 'updatePartial']);
-Route::delete('/package/{id}', [App\Http\Controllers\API\PackageController::class, 'destroy']);
+Route::get('/package', [ App\Http\Controllers\API\PackageController::class, 'index'])->name('api.package.index');
+Route::get('/package/{id}', [App\Http\Controllers\API\PackageController::class, 'show'])->name('api.package.show');
+Route::post('/package', [App\Http\Controllers\API\PackageController::class, 'store'])->name('api.package.store');
+Route::put( '/package/{id}', [App\Http\Controllers\API\PackageController::class, 'update'])->name('api.package.update');
+Route::patch('/package/{id}', [App\Http\Controllers\API\PackageController::class, 'updatePartial'])->name('api.package.updatePartial');
+Route::delete('/package/{id}', [App\Http\Controllers\API\PackageController::class, 'destroy'])->name('api.package.destroy');

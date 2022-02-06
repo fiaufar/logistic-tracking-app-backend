@@ -24,6 +24,12 @@ class PackageController extends Controller
         return response()->json($data, 200);
     }
 
+    public function show($id)
+    {
+        $data = Package::findOrFail($id);
+        return response()->json($data, 200);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
