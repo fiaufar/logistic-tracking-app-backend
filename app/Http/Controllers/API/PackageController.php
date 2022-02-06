@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreatePackageRequest;
+use App\Http\Requests\UpdatePackageRequest;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+// use Illuminate\Support\MessageBag;
 
 class PackageController extends Controller
 {
@@ -21,49 +25,17 @@ class PackageController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePackageRequest $request)
     {
         // dd($request->all());
         $data = Package::create($request->all());
 
         return response()->json($data, 201);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -73,7 +45,7 @@ class PackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePackageRequest $request, $id)
     {
         $packaga = Package::findOrFail($id);
         $packaga->update($request->all());
@@ -90,6 +62,21 @@ class PackageController extends Controller
      */
     public function updatePartial(Request $request, $id)
     {
+        $packageRules = Package::$rules;
+        $rules = [];
+        foreach ($request->all() as $key => $value) {
+            $rules[$key] = $packageRules[$key];
+        }
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Invalid data send',
+                'details' => $validator->messages()->get('*'),
+            ], 422);
+        }
+        // $validator->validate();
+
         $packaga = Package::findOrFail($id);
         foreach ($request->all() as $key => $value) {
             $packaga[$key] = $value;
