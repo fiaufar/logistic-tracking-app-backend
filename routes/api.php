@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/package', [ App\Http\Controllers\API\PackageController::class, 'index']);
+Route::post('/package', [App\Http\Controllers\API\PackageController::class, 'store']);
+Route::put( '/package/{id}', [App\Http\Controllers\API\PackageController::class, 'update']);
+Route::patch('/package/{id}', [App\Http\Controllers\API\PackageController::class, 'updatePartial']);
+Route::delete('/package/{id}', [App\Http\Controllers\API\PackageController::class, 'destroy']);
