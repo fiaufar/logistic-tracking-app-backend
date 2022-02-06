@@ -11,7 +11,7 @@ composer install
 </code></pre>
 - Setup .env file, you can copy from .env.example
 - Add or change .env configuration  below
-- Add database configuration example : 
+- Change database configuration to : 
 <pre><code>
 MONGO_DB_HOST=127.0.0.1
 MONGO_DB_PORT=27017
@@ -34,6 +34,7 @@ php artisan serve
     <tr>
         <th>Route</td>
         <th>Method</td>
+        <th>Description</td>
     </tr>
     <tr>
         <th>/api/package</td>
