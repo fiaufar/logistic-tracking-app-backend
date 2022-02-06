@@ -32,7 +32,6 @@ class PackageController extends Controller
      */
     public function store(CreatePackageRequest $request)
     {
-        // dd($request->all());
         $data = Package::create($request->all());
 
         return response()->json($data, 201);
@@ -75,7 +74,6 @@ class PackageController extends Controller
                 'details' => $validator->messages()->get('*'),
             ], 422);
         }
-        // $validator->validate();
 
         $packaga = Package::findOrFail($id);
         foreach ($request->all() as $key => $value) {
