@@ -55,7 +55,7 @@ class PackageController extends Controller
         $packaga = Package::findOrFail($id);
         $packaga->update($request->all());
 
-        return response()->json($packaga, 201);
+        return response()->json($packaga, 200);
     }
 
     /**
@@ -88,7 +88,7 @@ class PackageController extends Controller
 
         $packaga->save();
 
-        return response()->json($packaga, 201);
+        return response()->json($packaga, 200);
     }
 
     /**
@@ -102,6 +102,6 @@ class PackageController extends Controller
         $packaga = Package::findOrFail($id);
         $packaga->delete();
 
-        return response()->json('Success', 201);
+        return response()->json('Success', 200);
     }
 }
