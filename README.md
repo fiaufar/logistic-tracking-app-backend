@@ -1,4 +1,4 @@
-## MileApp Web Service
+## Simple Logistic Tracking App
 
 How to run project : 
 
